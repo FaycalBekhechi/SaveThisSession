@@ -10,7 +10,7 @@ var argv = require('yargs')
 			demand: true
 		},
 		'env': {
-			describe: 'Choose a environment build',
+			describe: 'Choose an environment build',
 			choices: ['development', 'production'],
 			default: 'development'
 		},
