@@ -5,12 +5,13 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
 var babelify = require('babelify');
-var config = require('../../GulpConfig');
+var config = require(__root +'gulp/GulpConfig');
 var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
 var rename = require('rename');
 var envify = require('envify/custom');
 var uglify = require('gulp-uglify');
+var pathmodify = require('pathmodify');
 
 function handleError(err) {
 	gutil.log(err);
@@ -24,6 +25,14 @@ function task(sources) {
 				entries: entry,
 				debug: config.isDebug
 			})
+				.plugin(pathmodify, {
+					mods: [
+						pathmodify.mod.dir('app', __root +'src'),
+						pathmodify.mod.dir('chrome', __root +'src/chrome/js'),
+						pathmodify.mod.dir('chrome-app', __root +'src/chrome'),
+						pathmodify.mod.dir('shared', __root +'src/shared')
+					]
+				})
 				.external(config.libs)
 				.transform(babelify.configure(config.babelOptions))
 				.transform(envify({

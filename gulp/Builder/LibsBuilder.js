@@ -1,7 +1,7 @@
 /**
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
-var config = require('./../GulpConfig');
+var config = require(__root +'gulp/GulpConfig');
 var LibrariesBuilder = require('./Tasks/LibrariesBuilder');
 
 var libs = config.libs;

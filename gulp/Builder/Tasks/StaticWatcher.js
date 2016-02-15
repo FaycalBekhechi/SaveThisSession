@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
 var path = require('path');
-var config = require('../../GulpConfig');
+var config = require(__root +'gulp/GulpConfig');
 
 function task(sources) {
 	return function() {

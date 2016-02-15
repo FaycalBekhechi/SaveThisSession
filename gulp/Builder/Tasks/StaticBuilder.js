@@ -2,7 +2,7 @@
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
 var gulp = require('gulp');
-var config = require('../../GulpConfig');
+var config = require(__root +'gulp/GulpConfig');
 var es = require('event-stream');
 
 // exclude empty directories:

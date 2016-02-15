@@ -1,10 +1,12 @@
 /**
  * Created by Fayçal Bekhechi on 2016-02-12.
  */
+global.__root = __dirname + '/';
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var BuilderProvider = require('./gulp/BuilderProvider');
-var config = require('./gulp/GulpConfig');
+var BuilderProvider = require(__root  +'gulp/BuilderProvider');
+var config = require(__root  +'gulp/GulpConfig');
 
 gutil.log(config);
 

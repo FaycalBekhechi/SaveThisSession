@@ -27,6 +27,7 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.7",
+    "pathmodify": "^0.5.0",
     "rename": "^1.0.3",
     "vinyl-source-stream": "^1.1.0"
   },

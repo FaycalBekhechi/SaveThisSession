@@ -3,7 +3,7 @@
  */
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var config = require('../../GulpConfig');
+var config = require(__root +'gulp/GulpConfig');
 var browserify = require('browserify');
 var streamify = require('gulp-streamify');
 var source = require('vinyl-source-stream');
