@@ -1,0 +1,7 @@
+-- build process:
+watchify ?
+
+-- chrome:
+create all icons
+minimum chrome version in manifest
+manifest permissions
