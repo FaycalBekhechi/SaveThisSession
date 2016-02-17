@@ -28,8 +28,7 @@ function task(sources) {
 				.plugin(pathmodify, {
 					mods: [
 						pathmodify.mod.dir('app', __root +'src'),
-						pathmodify.mod.dir('chrome', __root +'src/chrome/js'),
-						pathmodify.mod.dir('chrome-app', __root +'src/chrome'),
+						pathmodify.mod.dir('chrome', __root +'src/chrome'),
 						pathmodify.mod.dir('shared', __root +'src/shared')
 					]
 				})
