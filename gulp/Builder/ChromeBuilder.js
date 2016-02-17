@@ -2,39 +2,66 @@
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
 var JsBuilder = require('./Tasks/JsBuilder');
+var I18nBuilder = require('./Tasks/I18nBuilder');
 var Watcher = require('./Tasks/Watcher');
 var StaticBuilder = require('./Tasks/StaticBuilder');
-var StaticWatcher = require('./Tasks/StaticWatcher');
+var StaticWatcherBuilder = require('./Tasks/StaticWatcherBuilder');
 var MultipleTaskInvoker = require('./Tasks/MultipleTaskInvoker');
 
-var jsSources = [ 'src/chrome/js/background.js', 'src/chrome/js/options.js' ];
-var jsWatchSources = 'src/chrome/**/*.js';
+var jsEntries = [ 'src/chrome/js/background.js', 'src/chrome/js/options.js' ];
+var jsWatchSources = [
+	{
+		globs: 'src/chrome/js/**/*.js'
+	}
+];
 
 var staticSources = [
-	'src/shared/**/*',
-	'!src/shared/**/*.js',
-	'!src/shared/**/*.twig',
+	{
+		globs: 'src/shared/assets/**/*',
+		opts: { base: 'src/shared' }
+	},
+	{
+		globs: ['src/chrome/assets/**/*', 'src/chrome/*'],
+		opts: { base: 'src/chrome' }
+	}
+];
 
-	'src/chrome/**/*',
-	'!src/chrome/**/*.js',
-	'!src/chrome/**/*.twig'
+var i18nSources = [
+	{
+		globs: 'src/shared/locale/**/*',
+		opts: { base: 'src/shared' }
+	}
 ];
 
 var ChromeBuilder = {
 	tasks: {
+		// JS
 		'_private:js:watch': Watcher('js:build', jsWatchSources),
-		'_private:statics:watch': StaticWatcher(staticSources),
+		'js:build': JsBuilder(jsEntries),
+		'js:build-than-watch': MultipleTaskInvoker(['js:build', '_private:js:watch']),
 
-		'js:build': JsBuilder(jsSources),
-		'js:watch': MultipleTaskInvoker(['js:build', '_private:js:watch']),
+		// static files
+		'_private:statics:watch': Watcher('_private:statics:watch:build', staticSources),
+		'_private:statics:watch:build': StaticWatcherBuilder(),
 		'statics:build': StaticBuilder(staticSources),
-		'statics:watch': MultipleTaskInvoker(['statics:build', '_private:statics:watch']),
-		'all:build': MultipleTaskInvoker(['js:build', 'statics:build']),
-		'all:watch': MultipleTaskInvoker(['js:watch', 'statics:watch'])
+		'statics:build-than-watch': MultipleTaskInvoker(['statics:build', '_private:statics:watch']),
+
+		// i18n
+		'_private:i18n:watch': Watcher('i18n:build', i18nSources),
+		'i18n:build': I18nBuilder(i18nSources), // it handle also the watch
+		'i18n:build-than-watch': MultipleTaskInvoker(['i18n:build', '_private:i18n:watch']),
+
+		// all
+		'all:build': MultipleTaskInvoker(['js:build', 'statics:build', 'i18n:build']),
+		'all:build-than-watch': MultipleTaskInvoker(['js:build-than-watch', 'statics:build-than-watch', 'i18n:build-than-watch'])
 	},
 
 	runTask: function(taskName, args) {
-		this.tasks[taskName].apply(null, [this.runTask.bind(this)].concat(args) );
+		if (this.tasks.hasOwnProperty(taskName)) {
+			this.tasks[taskName].apply(null, [this.runTask.bind(this)].concat(args));
+		} else {
+			throw new Error('task "'+ taskName +'" does not exists');
+		}
 	}
 };
 

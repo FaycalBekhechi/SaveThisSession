@@ -7,9 +7,11 @@ var gutil = require('gulp-util');
 function task(cbTask, sources) {
 	return function(run) {
 		gutil.log('Watching ... ', sources);
-		gulp.watch(sources, function(event) {
-			gutil.log('File ' + event.path + ' was ' + event.type);
-			run(cbTask, event);
+		sources.forEach(function(source) {
+			gulp.watch(source.globs, function(event) {
+				gutil.log('File ' + event.path + ' was ' + event.type);
+				run(cbTask, [event, source.opts || {}]);
+			});
 		});
 	};
 }
