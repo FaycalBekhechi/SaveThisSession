@@ -16,8 +16,12 @@ export default class I18n {
 		this._load();
 	}
 
-	getReactIntlMapping(locale) {
-		return this._mapping[locale]['reactIntl'];
+	getMessages(locale) {
+		return this._mapping[locale].reactIntl.messages;
+	}
+
+	getReactIntlLocale(locale) {
+		return this._mapping[locale].reactIntl.locale;
 	}
 
 	_load() {

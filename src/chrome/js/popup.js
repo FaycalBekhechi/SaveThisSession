@@ -3,17 +3,31 @@
  */
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import ChromeApp from 'chrome/js/ChromeApp';
 
 class Popup extends Component {
 
+	static propTypes = {
+		app: PropTypes.instanceOf(ChromeApp).isRequired
+	};
+
+	constructor(props, context) {
+		super(props, context);
+		this._i18n = new I18n();
+		this._renderer = props.app.renderer;
+	}
+
 	render() {
-		<h1>
-			lol
-		</h1>
+		const services = {
+			i18n: this._i18n
+		};
+
+		return (
+			<ServiceProvider services={services}>
+				<I18nComponent>
+					{this._element}
+				</I18nComponent>
+			</ServiceProvider>
+		);
 	}
 }
-
-ReactDOM.render(
-	<Popup />,
-	document.getElementById('render-surface')
-);

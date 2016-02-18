@@ -9,7 +9,7 @@ export default class Renderer {
 
 	render(element, target, cb = undefined) {
 		this.useTarget(target);
-		ReactDOM.render(
+		return ReactDOM.render(
 			element,
 			target,
 			cb

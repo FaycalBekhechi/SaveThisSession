@@ -9,7 +9,7 @@ import { localeSelector } from 'shared/js/selector/i18n';
 @connect(
 	(state, props) => {
 		return {
-			browserLocale: localeSelector(state)
+			locale: localeSelector(state)
 		};
 	}
 )
