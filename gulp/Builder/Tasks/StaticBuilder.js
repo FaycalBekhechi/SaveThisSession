@@ -2,26 +2,17 @@
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
 var gulp = require('gulp');
-var config = require(__root +'gulp/GulpConfig');
-var es = require('event-stream');
-
-// exclude empty directories:
-// http://stackoverflow.com/questions/23719731/gulp-copying-empty-directories
-var onlyDirs = function(es) {
-	return es.map(function(file, cb) {
-		if (file.stat.isFile()) {
-			return cb(null, file);
-		} else {
-			return cb();
-		}
-	});
-};
+var onlyFiles = require(__root +'gulp/Builder/PipeTransformer/GulpOnlyFiles');
+var filePathHelper = require(__root +'gulp/Builder/Helper/FileTargetPath');
+var path = require('path');
 
 function task(sources) {
 	return function() {
-		gulp.src(sources)
-			.pipe(onlyDirs(es))
-			.pipe(gulp.dest('build/'+ config.environment +'/'+ config.target ));
+		sources.forEach(function(source) {
+			gulp.src(source.globs, source.opts)
+				.pipe(onlyFiles())
+				.pipe(gulp.dest(filePathHelper.getBuildTargetPath()));
+		});
 	};
 }
 
