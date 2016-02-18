@@ -1,11 +1,14 @@
 -- build process:
 watchify ?
+plumber ?
 
 -- chrome:
 create all icons
 minimum chrome version in manifest
 manifest permissions
 
+-- distribute:
+http://frontendbabel.info/articles/developing-cross-browser-extensions/
 
 use babel etc ...
 chromise and improve for synchrone functions
