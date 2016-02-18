@@ -4,4 +4,3 @@
 import 'babel-polyfill';
 import React from 'react';
 
-console.log('ok0');

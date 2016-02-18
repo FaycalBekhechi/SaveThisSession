@@ -2,8 +2,20 @@
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
 import 'babel-polyfill';
-import l from 'chrome/background';
+import React from 'react';
 
-document.addEventListener('DOMContentLoaded', () => {
-	console.log('DOM loaded');
+let app;
+
+function init() {
+	app = new ChromeApp();
+	app.render(
+		<Popup />,
+		document.getElementById('surface-render')
+	);
+}
+
+document.addEventListener('DOMContentLoaded', function load() {
+	document.removeEventListener('DOMContentLoaded', load, false);
+	init();
 });
+

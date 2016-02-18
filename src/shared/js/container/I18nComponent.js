@@ -9,19 +9,23 @@ import { localeSelector } from 'shared/js/selector/i18n';
 @connect(
 	(state, props) => {
 		return {
-			locale: localeSelector(state)
+			browserLocale: localeSelector(state)
 		};
 	}
 )
+@services({
+	i18n: true
+})
 export default class I18nComponent extends Component {
 	render() {
-		const { locale, messages } = this.props;
-		const messages = {
-			'test': 'test message.'
-		};
+		const { i18n } = this.props;
+		const { browserLocale } = this.props;
+		const config = i18n.getReactIntlMapping(browserLocale);
 
-		<IntlProvider locale={locale} messages={messages}>
-			{this.props.children}
-		</IntlProvider>
+		return (
+			<IntlProvider locale={config.locale} messages={config.messages}>
+				{this.props.children}
+			</IntlProvider>
+		);
 	}
 }

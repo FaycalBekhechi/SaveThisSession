@@ -11,7 +11,7 @@ var MultipleTaskInvoker = require('./Tasks/MultipleTaskInvoker');
 var jsEntries = [ 'src/chrome/js/background.js', 'src/chrome/js/options.js' ];
 var jsWatchSources = [
 	{
-		globs: 'src/chrome/js/**/*.js'
+		globs: ['src/chrome/js/**/*.js', 'src/shared/js/**/*.js']
 	}
 ];
 
