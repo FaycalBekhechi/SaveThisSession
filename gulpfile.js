@@ -13,7 +13,7 @@ gutil.log(config);
 gulp.task('all:build', function() {
 	var builder = BuilderProvider.getTargetBuilder(config.target);
 	if (config.watch) {
-		builder.runTask('all:watch');
+		builder.runTask('all:build-than-watch');
 	} else {
 		builder.runTask('all:build');
 	}
@@ -22,7 +22,7 @@ gulp.task('all:build', function() {
 gulp.task('js:build', function () {
 	var builder = BuilderProvider.getTargetBuilder(config.target);
 	if (config.watch) {
-		builder.runTask('js:watch');
+		builder.runTask('js:build-than-watch');
 	} else {
 		builder.runTask('js:build');
 	}
@@ -31,9 +31,18 @@ gulp.task('js:build', function () {
 gulp.task('statics:build', function() {
 	var builder = BuilderProvider.getTargetBuilder(config.target);
 	if (config.watch) {
-		builder.runTask('statics:watch');
+		builder.runTask('statics:build-than-watch');
 	} else {
 		builder.runTask('statics:build');
+	}
+});
+
+gulp.task('i18n:build', function() {
+	var builder = BuilderProvider.getTargetBuilder(config.target);
+	if (config.watch) {
+		builder.runTask('i18n:build-than-watch');
+	} else {
+		builder.runTask('i18n:build');
 	}
 });
 

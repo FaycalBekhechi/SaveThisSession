@@ -12,11 +12,7 @@ var rename = require('rename');
 var envify = require('envify/custom');
 var uglify = require('gulp-uglify');
 var pathmodify = require('pathmodify');
-
-function handleError(err) {
-	gutil.log(err);
-	this.emit('end');
-}
+var errorHandler = require(__root +'gulp/Builder/Helper/ErrorHandler');
 
 function task(sources) {
 	return function() {
@@ -40,7 +36,7 @@ function task(sources) {
 					NODE_ENV: config.env
 				}))
 				.bundle()
-				.on('error', handleError)
+				.on('error', errorHandler)
 				.pipe(source(rename(
 					entry, {
 						dirname: ''
