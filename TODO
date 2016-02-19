@@ -17,3 +17,5 @@ i18n
 old options page
 
 seamless immutable use dev mode in all cases
+http://stackoverflow.com/questions/11005258/persistent-unique-id-for-chrome-tabs-that-lasts-between-browser-sessions
+https://github.com/drzax/chrome-tab-registry

@@ -29,6 +29,9 @@
     "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.7",
     "pathmodify": "^0.5.0",
+    "redux-devtools": "^3.1.1",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.4",
     "rename": "^1.0.3",
     "vinyl-source-stream": "^1.1.0"
   },
