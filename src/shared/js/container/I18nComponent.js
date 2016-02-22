@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { localeSelector } from 'shared/js/selector/i18n';
 
 @connect(
-	(state, props) => {
+	(state) => {
 		return {
 			locale: localeSelector(state)
 		};
@@ -19,8 +19,8 @@ import { localeSelector } from 'shared/js/selector/i18n';
 export default class I18nComponent extends Component {
 	render() {
 		const { i18n } = this.props;
-		const { browserLocale } = this.props;
-		const config = i18n.getReactIntlMapping(browserLocale);
+		const { locale } = this.props;
+		const config = i18n.getLocaleConfig(locale).reactIntl;
 
 		return (
 			<IntlProvider locale={config.locale} messages={config.messages}>

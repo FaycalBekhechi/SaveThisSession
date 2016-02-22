@@ -47,18 +47,18 @@ export default class ChromeApp {
 	}
 
 	configure(cb) {
+		this._store.dispatch(
+			AppActions.configure({
+				locale: this._locale
+			})
+		);
+
 		observeStore(this._store, configuredSelector, (state, unSubscribe) => {
 			if (state === true) {
 				unSubscribe();
 				cb();
 			}
 		});
-
-		this._store.dispatch(
-			AppActions.configure({
-				locale: this._locale
-			})
-		);
 	}
 
 	render() {

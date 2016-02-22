@@ -12,16 +12,9 @@ export default class I18n {
 
 	_mapping;
 
-	constructor() {
+	constructor(localeProvider) {
+		this._localeProvider = localeProvider;
 		this._load();
-	}
-
-	getMessages(locale) {
-		return this._mapping[locale].reactIntl.messages;
-	}
-
-	getReactIntlLocale(locale) {
-		return this._mapping[locale].reactIntl.locale;
 	}
 
 	_load() {
@@ -33,6 +26,10 @@ export default class I18n {
 				}
 			}
 		};
+	}
+
+	getLocaleConfig(locale) {
+		return this._mapping[locale];
 	}
 
 }

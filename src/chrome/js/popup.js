@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ChromeApp from 'chrome/js/ChromeApp';
+import Popup from 'chrome/js/container/Popup';
 
 class Popup extends Component {
 
