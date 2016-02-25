@@ -29,7 +29,9 @@ export default class Renderer {
 		if (index > -1) {
 			ReactDOM.unmountComponentAtNode(target);
 			this.targets.splice(index, 1);
+			return true;
 		}
+		return false;
 	}
 
 	destroy() {

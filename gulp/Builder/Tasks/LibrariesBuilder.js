@@ -11,16 +11,14 @@ var uglify = require('gulp-uglify');
 
 function task(libs) {
 	return function() {
-		libs.forEach(function(lib) {
 			browserify({
 				debug: config.isDebug
 			})
-				.require(lib)
+				.require(libs)
 				.bundle()
-				.pipe(source(lib +'.js'))
+				.pipe(source('libs.js'))
 				.pipe(config.isProd ? streamify(uglify()) : gutil.noop())
 				.pipe(gulp.dest('build/'+ config.environment +'/'+ config.target +'/scripts/lib'));
-		});
 	};
 }
 

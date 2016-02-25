@@ -8,7 +8,7 @@ var StaticBuilder = require('./Tasks/StaticBuilder');
 var StaticWatcherBuilder = require('./Tasks/StaticWatcherBuilder');
 var MultipleTaskInvoker = require('./Tasks/MultipleTaskInvoker');
 
-var jsEntries = [ 'src/chrome/js/background.js', 'src/chrome/js/options.js' ];
+var jsEntries = [ 'src/chrome/js/background.js', 'src/chrome/js/options.js', 'src/chrome/js/popup.js' ];
 var jsWatchSources = [
 	{
 		globs: ['src/chrome/js/**/*.js', 'src/shared/js/**/*.js']

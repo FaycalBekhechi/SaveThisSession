@@ -1,82 +1,30 @@
 /**
  * Created by Fayçal Bekhechi on 2016-02-18.
  */
-import Renderer from 'shared/js/service/Renderer';
+import React, { Component, PropTypes } from 'react';
+import AppActions from 'shared/js/action/AppActions';
+import { connect } from 'react-redux';
 
-import createStore from 'shared/js/store/createStore';
-import observeStore from 'shared/js/store/observeStore';
-import reducers from 'chrome/js/reducer/reducers';
-import Immutable from 'seamless-immutable';
+@connect(
+	null,
+	(dispatch) => ({
+		configure: AppActions.configure
+	})
+)
+export default class ChromeApp extends Component {
 
-import { configuredSelector } from 'shared/js/selector/app';
-
-const initialState = Immutable({});
-
-export default class ChromeApp {
-
-	_initialized = false;
-	_element = null; // rendered element
-
-	constructor(component, target) {
-		//if (global.ChromeApp) {
-		//	throw new Error('A ChromeApp already exists');
-		//}
-		//
-		//global.ChromeApp = this;
-
-		this._component = component;
-		this._target = target;
-
-		this._renderer = new Renderer();
-
-		this._store = createStore(reducers, initialState);
-		this._locale = chrome.i18n.getMessage('@@ui_locale');
-
-		this.init();
-	}
-
-	init() {
-		if (this._initialized) {
-			return;
-		}
-		this._initialized = true;
-
-		this.configure(() => {
-			this.render();
+	componentWillMount() {
+		const locale = chrome.i18n.getMessage('@@ui_locale');
+		setTimeout(() => {
+		this.props.configure({
+			locale: locale
 		});
-	}
 
-	configure(cb) {
-		this._store.dispatch(
-			AppActions.configure({
-				locale: this._locale
-			})
-		);
-
-		observeStore(this._store, configuredSelector, (state, unSubscribe) => {
-			if (state === true) {
-				unSubscribe();
-				cb();
-			}
-		});
+		}, 5000);
 	}
 
 	render() {
-		const ChildComponent = this._component;
-
-		this._element = this._renderer.render(
-			(
-				<Provider store={this._store}>
-					<ChildComponent app={this} />
-				</Provider>
-			),
-			this._target
-		);
-
-		return this._element;
+		return this.props.children;
 	}
 
-	get renderer() {
-		return this._renderer;
-	}
 }

@@ -22,10 +22,13 @@ export default class I18nComponent extends Component {
 		const { locale } = this.props;
 		const config = i18n.getLocaleConfig(locale).reactIntl;
 
-		return (
-			<IntlProvider locale={config.locale} messages={config.messages}>
-				{this.props.children}
-			</IntlProvider>
-		);
+		if (locale) {
+			return (
+				<IntlProvider locale={config.locale} messages={config.messages}>
+					{this.props.children}
+				</IntlProvider>
+			);
+		}
+		return null;
 	}
 }

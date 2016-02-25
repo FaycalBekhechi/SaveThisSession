@@ -1,6 +1,8 @@
 /**
  * Created by Fayçal Bekhechi on 2016-02-14.
  */
+
+var package = require(__root +'package.json');
 var argv = require('yargs')
 	.usage('Usage: gulp <options>')
 	.options({
@@ -21,14 +23,14 @@ var argv = require('yargs')
 	})
 	.argv;
 
-var libs = ['react', 'react-dom', 'babel-polyfill'];
 var environment = argv.env;
 var isDebug = environment === 'development';
 var isProd = environment === 'production';
+var libs = Object.keys(package.dependencies);
 var watch = argv.watch;
 var babelOptions = {
 	presets: ['es2015', 'react', 'stage-0'],
-	plugins: ['external-helpers', 'transform-runtime']
+	plugins: ['external-helpers', 'transform-runtime', 'transform-decorators-legacy']
 };
 var target = argv.target;
 
