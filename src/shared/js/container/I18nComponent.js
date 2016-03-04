@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import { localeSelector } from 'shared/js/selector/i18n';
+import injects from 'shared/js/inject-dependency/injects';
 
 @connect(
 	(state) => {
@@ -13,7 +14,7 @@ import { localeSelector } from 'shared/js/selector/i18n';
 		};
 	}
 )
-@services({
+@injects({
 	i18n: true
 })
 export default class I18nComponent extends Component {

@@ -26,3 +26,6 @@ redux-watch ? nope
 redux-undo
 dev tools
 redux promise
+jsx-control-statements
+redux devtools diff monitor
+react-tunnel

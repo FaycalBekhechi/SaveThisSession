@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import AppActions from 'shared/js/action/AppActions';
 import { connect } from 'react-redux';
+import injects from 'shared/js/inject-dependency/injects';
 
 @connect(
 	null,
@@ -11,16 +12,18 @@ import { connect } from 'react-redux';
 		configure: AppActions.configure
 	})
 )
+@injects({
+	i18nProvider: true
+})
 export default class ChromeApp extends Component {
 
 	componentWillMount() {
-		const locale = chrome.i18n.getMessage('@@ui_locale');
-		setTimeout(() => {
-		this.props.configure({
-			locale: locale
-		});
-
-		}, 5000);
+		this.props.i18nProvider.getBrowserLocale()
+			.then((locale) => {
+				this.props.configure({
+					locale: locale
+				});
+			});
 	}
 
 	render() {

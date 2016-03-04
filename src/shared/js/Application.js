@@ -1,6 +1,7 @@
 /**
  * Created by Fayçal Bekhechi on 2016-02-24.
  */
+import React from 'react';
 import Renderer from 'shared/js/service/Renderer';
 import { Provider } from 'react-redux';
 
@@ -21,7 +22,7 @@ export default class Application {
 			return;
 		}
 
-		document.addEventListener('DOMContentLoaded', () => {
+		let load = window.addEventListener('DOMContentLoaded', () => {
 			this._initialized = true;
 			document.removeEventListener('DOMContentLoaded', load, false);
 			this.processScheduledAddRoot();
@@ -54,15 +55,13 @@ export default class Application {
 			throw new Error('Target is invalid');
 		}
 
-		const RootComponent = component; // just for sexier code
-
 		return this._renderer.render(
 			(
-				<Provider store={this._store}>
-					<RootComponent app={this} />
+				<Provider store={this.store}>
+					{component}
 				</Provider>
 			),
-			this.target
+			target
 		);
 	}
 

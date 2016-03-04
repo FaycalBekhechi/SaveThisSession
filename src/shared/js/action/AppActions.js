@@ -16,6 +16,22 @@ function configure(config) {
 	};
 }
 
+function asyncFn(locale, timer) {
+	return new Promise((resolve) => {
+		setTimeout(function() {
+			resolve(locale);
+		}, timer);
+	});
+}
+
+function waitThanConfigure(config, timer) {
+	return async ({ dispatch }) => {
+		var locale = await asyncFn(config.locale, timer);
+		return dispatch(configure({ locale, ...config }));
+	};
+}
+
 export default {
-	configure
+	configure,
+	waitThanConfigure
 };

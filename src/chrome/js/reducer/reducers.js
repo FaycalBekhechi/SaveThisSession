@@ -5,6 +5,7 @@
  * Time: 13:38
  */
 import ActionType from 'shared/js/constant/ActionType';
+import Immutable from 'seamless-immutable';
 
 const defaultState = Immutable({
 	application: {

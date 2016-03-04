@@ -3,9 +3,10 @@
  */
 import reducers from 'chrome/js/reducer/reducers';
 import createStore from 'shared/js/store/createStore';
+import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({});
 
-const store = createStore(reducers, initialState);
+const store = createStore(reducers, {}, initialState);
 
 export default store;
