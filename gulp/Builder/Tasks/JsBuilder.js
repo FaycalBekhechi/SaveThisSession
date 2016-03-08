@@ -32,7 +32,7 @@ function task(sources) {
 				.transform(babelify.configure(config.babelOptions))
 				.transform(envify({
 					_: 'purge',
-					NODE_ENV: config.env
+					NODE_ENV: config.environment
 				}))
 				.bundle()
 				.on('error', errorHandler)

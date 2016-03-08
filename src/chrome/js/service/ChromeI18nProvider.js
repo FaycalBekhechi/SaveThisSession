@@ -10,8 +10,7 @@ export default class ChromeI18nProvider extends I18nProvider {
 
 	getBrowserLocale() {
 		return new Promise((resolve) => {
-			return resolve('en');
-			return resolve(chrome.i18n.getMessage('@@ui_locale'));
+			return resolve(chrome.i18n.getMessage('locale'));
 		});
 	}
 }

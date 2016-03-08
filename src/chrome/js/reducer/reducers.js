@@ -4,22 +4,25 @@
  * Date: 18/02/2016
  * Time: 13:38
  */
+import { combineReducers } from 'redux';
 import ActionType from 'shared/js/constant/ActionType';
 import Immutable from 'seamless-immutable';
 
 const defaultState = Immutable({
-	application: {
-		configured: false,
-		locale: ''
-	}
+	configured: false,
+	locale: null
 });
 
-export default function(state = defaultState, action) {
+function reducer(state = defaultState, action) {
 	if (action.type == ActionType.App.Configure) {
-		state.application = {
+		state = state.merge({
 			configured: true,
 			locale: action.locale
-		};
+		});
 	}
 	return state;
-};
+}
+
+export default combineReducers({
+	application: reducer
+});

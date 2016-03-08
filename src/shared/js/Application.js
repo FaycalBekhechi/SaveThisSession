@@ -22,12 +22,23 @@ export default class Application {
 			return;
 		}
 
+
 		let load = window.addEventListener('DOMContentLoaded', () => {
 			this._initialized = true;
 			document.removeEventListener('DOMContentLoaded', load, false);
+			this.initDevTools();
 			this.processScheduledAddRoot();
 		});
 
+	}
+
+	initDevTools() {
+		if (process.env.NODE_ENV === 'development') {
+			let element = document.createElement('div');
+			document.body.appendChild(element);
+			const DevTools = require('shared/js/container/dev/DevTools');
+			this.addRoot(<DevTools />, () => element);
+		}
 	}
 
 	processScheduledAddRoot() {

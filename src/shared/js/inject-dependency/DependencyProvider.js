@@ -6,9 +6,6 @@
  */
 import React, { Component, PropTypes } from 'react';
 
-// inspired by react-tunnel module from npm but is more simple
-
-
 export default class DependencyProvider extends Component {
 
 	static propTypes = {

@@ -5,7 +5,7 @@ import reducers from 'chrome/js/reducer/reducers';
 import createStore from 'shared/js/store/createStore';
 import Immutable from 'seamless-immutable';
 
-const initialState = Immutable({});
+const initialState = {};
 
 const store = createStore(reducers, {}, initialState);
 

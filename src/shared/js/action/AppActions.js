@@ -7,12 +7,15 @@
 import ActionType from 'shared/js/constant/ActionType';
 
 function configure(config) {
-	return ({ i18n }) => {
-		return {
-			locale: config.locale,
-			browserLocale: config.locale, // just to be explicit
-			reactIntlLocale: i18n.getLocaleConfig(config.locale).reactIntl.locale
-		};
+	return {
+		type: ActionType.App.Configure,
+		locale: config.locale
+	};
+	return ({ i18n, dispatch }) => {
+		return dispatch({
+			type: ActionType.App.Configure,
+			locale: config.locale
+		});
 	};
 }
 

@@ -3,6 +3,9 @@
  */
 import { createSelector } from 'reselect';
 
-export const localeSelector = (state) => {
-	return state.application.locale;
-};
+const applicationSelector = state => state.application;
+
+export const localeSelector = createSelector(
+	applicationSelector,
+	(application) => application && application.locale
+);

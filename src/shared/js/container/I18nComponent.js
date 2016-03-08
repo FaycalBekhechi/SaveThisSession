@@ -21,9 +21,10 @@ export default class I18nComponent extends Component {
 	render() {
 		const { i18n } = this.props;
 		const { locale } = this.props;
-		const config = i18n.getLocaleConfig(locale).reactIntl;
 
 		if (locale) {
+			const config = i18n.getLocaleConfig(locale).reactIntl;
+
 			return (
 				<IntlProvider locale={config.locale} messages={config.messages}>
 					{this.props.children}

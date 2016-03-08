@@ -28,20 +28,12 @@ export default class PopupRoot extends Component {
 			i18nProvider: this.i18nProvider
 		};
 
-		//return (
-		//	<DependencyProvider dependencies={injects}>
-		//		<ChromeApp>
-		//			<I18nComponent>
-		//				<div>wow such wow {}</div>
-		//			</I18nComponent>
-		//		</ChromeApp>
-		//	</DependencyProvider>
-		//);
-
 		return (
 			<DependencyProvider dependencies={injects}>
 				<ChromeApp>
-							<div>wow such wow {}</div>
+					<I18nComponent>
+						<div>wow such wow {}</div>
+					</I18nComponent>
 				</ChromeApp>
 			</DependencyProvider>
 		);

@@ -2,7 +2,10 @@
  * Created by Fayçal Bekhechi on 2016-02-18.
  */
 import { createStore, applyMiddleware, compose } from 'redux';
-import createReduxLogger from 'redux-logger';
+
+if (process.env.NODE_ENV === 'development') {
+	var createStoreDev = require('./createStoreDev');
+}
 
 //function isPromise(val) {
 //	return val && typeof val.then === 'function';
@@ -18,7 +21,7 @@ function getMiddleWares(dependencies) {
 			//}
 			return next(
 				typeof action === 'function'
-					? action({...dependencies, dispatch, getState})
+					? action({...dependencies, dispatch, getState, store: {dispatch, getState}})
 					: action
 			);
 		};
@@ -32,8 +35,8 @@ function getMiddleWares(dependencies) {
 	];
 
 	if (process.env.NODE_ENV === 'development') {
-		const logger = createReduxLogger();
-		middlewares.push(logger); // log state change
+		const devMiddleWares = createStoreDev.getMiddleWares();
+		middlewares.push(...devMiddleWares);
 	}
 
 	return applyMiddleware(...middlewares);
@@ -43,10 +46,8 @@ function getEnhancers() {
 	const enhancers = [];
 
 	if (process.env.NODE_ENV === 'development') {
-		const DevTools = require('shared/js/container/dev/DevTools');
-		const { persistState } = require('redux-devtools');
-		enhancers.push(window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument());
-		enhancers.push(persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)));
+		const devEnhancers = createStoreDev.getEnhancers();
+		enhancers.push(...devEnhancers);
 	}
 
 	return enhancers;

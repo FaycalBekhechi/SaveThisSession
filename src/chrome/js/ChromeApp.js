@@ -8,9 +8,9 @@ import injects from 'shared/js/inject-dependency/injects';
 
 @connect(
 	null,
-	(dispatch) => ({
+	{
 		configure: AppActions.configure
-	})
+	}
 )
 @injects({
 	i18nProvider: true

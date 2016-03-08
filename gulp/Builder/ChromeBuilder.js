@@ -17,11 +17,11 @@ var jsWatchSources = [
 
 var staticSources = [
 	{
-		globs: 'src/shared/assets/**/*',
+		globs: ['src/shared/assets/**/*'],
 		opts: { base: 'src/shared' }
 	},
 	{
-		globs: ['src/chrome/assets/**/*', 'src/chrome/*'],
+		globs: ['src/chrome/assets/**/*', 'src/chrome/_locales/**/*', 'src/chrome/*'],
 		opts: { base: 'src/chrome' }
 	}
 ];
