@@ -22,7 +22,7 @@ http://stackoverflow.com/questions/11005258/persistent-unique-id-for-chrome-tabs
 https://github.com/drzax/chrome-tab-registry
 https://github.com/facebook/react-devtools/issues/91
 
-
+dexie.js for indexeddb
 redux-watch ? nope
 redux-undo
 dev tools
@@ -30,3 +30,8 @@ redux promise
 jsx-control-statements
 redux devtools diff monitor
 react-tunnel
+
+sources:
+https://github.com/babyman/quick-tabs-chrome-extension/
+https://github.com/deanoemcke/thegreatsuspender
+https://github.com/Pauan/tab-organizer (the code is wtf, too hard to understand)

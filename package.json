@@ -46,6 +46,7 @@
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "reselect": "^2.0.3",
-    "seamless-immutable": "^5.0.1"
+    "seamless-immutable": "^5.0.1",
+    "then-chrome": "^1.0.5"
   }
 }

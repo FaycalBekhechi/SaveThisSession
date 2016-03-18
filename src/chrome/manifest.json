@@ -9,9 +9,8 @@
 		"default_popup": "popup.html"
 	},
 	"background": {
-		"scripts": ["scripts/background.js"],
-		"persistent": false
+		"scripts": ["scripts/lib/libs.js", "scripts/background.js"]
 	},
 	"options_page": "options.html",
-	"permissions": []
+	"permissions": ["tabs"]
 }
